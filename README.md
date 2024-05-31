@@ -24,7 +24,26 @@ The project uses the **SaaS starter** which includes a `User` model and authenti
 You need:
 
 * A local postgres instance
+
+``` sh
+docker run -d -p 5555:5432 \
+  -e POSTGRES_USER=loco \
+  -e POSTGRES_DB=myapp_development \
+  -e POSTGRES_PASSWORD="loco" \
+  postgres:15.3-alpine
+```
+
 * A local Redis instance
+
+``` sh
+docker run -p 6379:6379 -d redis redis-server
+```
+
+* (Optional) An Admin UI for the PostgreSQL Database
+
+``` sh
+docker run --link <container name via 'docker ps'>:db -p 8080:8080 adminer
+```
 
 Check out your development [configuration](config/development.yaml).
 
