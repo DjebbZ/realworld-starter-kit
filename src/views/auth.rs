@@ -1,4 +1,8 @@
+use axum::response::IntoResponse;
+use loco_rs::controller::{format, views::ViewRenderer};
+use loco_rs::Result;
 use serde::{Deserialize, Serialize};
+use serde_json::json;
 
 use crate::models::_entities::users;
 
@@ -20,4 +24,8 @@ impl LoginResponse {
             is_verified: user.email_verified_at.is_some(),
         }
     }
+}
+
+pub fn login_page(v: impl ViewRenderer) -> Result<impl IntoResponse> {
+    format::render().view(&v, "auth/login_page.html", json!({}))
 }
